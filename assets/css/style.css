@@ -68,12 +68,24 @@ h6{ font-size:18px; font-weight:700; }
 p{ margin:0 0 1em; font-size:16px; }
 strong,b{ color:inherit; font-weight:700; }
 
-/* marca-texto amarelo */
+/* marca-texto: faixa fina translúcida, não bloco sólido */
 mark{
-  background:linear-gradient(180deg, transparent 58%, var(--marca) 58%);
+  background:linear-gradient(180deg,
+    transparent 68%,
+    rgba(255,201,60,.58) 68%,
+    rgba(255,201,60,.58) 94%,
+    transparent 94%);
   color:inherit;
-  padding:0 .06em;
+  padding:0 .04em;
   box-decoration-break:clone; -webkit-box-decoration-break:clone;
+}
+/* sobre fundo escuro o amarelo estoura — mais discreto ainda */
+.on-dark mark{
+  background:linear-gradient(180deg,
+    transparent 70%,
+    rgba(224,164,41,.55) 70%,
+    rgba(224,164,41,.55) 93%,
+    transparent 93%);
 }
 
 .wrap{ width:min(var(--wrap), 100% - 36px); margin-inline:auto; }
@@ -377,11 +389,10 @@ mark{
 .inside__list{
   list-style:none; padding:0;
   margin:24px auto 0;
-  width:max-content; max-width:100%;
-  text-align:left;
+  width:min(560px, 100%);
 }
 .inside__list li{
-  display:flex; gap:11px; align-items:flex-start;
+  display:flex; gap:11px; align-items:center; justify-content:center;
   color:#F0E0C8;
   font-size:15px;
   padding:11px 2px;
