@@ -3,6 +3,13 @@
 Landing page da oferta *150 Receitas de Padaria Doces e Salgadas na sua Máquina de Pão*.
 Site estático puro (HTML + CSS + JS), sem build.
 
+Estrutura espelhada da referência `panificadora.donaneide.site`:
+barra topo → hero → categorias → receitas → dor → bloco escuro "o que vem dentro"
+→ bônus + faixa de valor → planos empilhados (básico → ponte → completo)
+→ garantia → FAQ → fechamento escuro → rodapé.
+Escala de fonte fixa: PC 40/35/30/25/20/18/16 · mobile 35/30/25/22/20/18/16
+(o h1 da hero é caso à parte: 64px no PC, 40px no mobile).
+
 ```
 index.html
 assets/css/style.css
@@ -23,8 +30,10 @@ robots.txt
    Sem isso os dois botões de plano não levam a lugar nenhum (avisa no console).
 2. **Pixel / tracking** — colar a tag logo antes do `</body>` do `index.html`,
    nunca dentro de um `<script>` já existente.
-3. **Mockup** — a capa da hero hoje é feita em CSS. Para trocar por imagem real,
-   substituir o bloco `.mockup` (existe em duas cópias: mobile e desktop).
+3. **Mockup** — a capa é feita em CSS. Para trocar por imagem real, substituir o
+   bloco `.mockup` (aparece 2x: na hero e na seção escura "o que vem dentro").
+   As fotos de receita da referência viram `.tiles` / `.cats` com emoji — dá pra
+   trocar por `<img>` sem mexer no grid.
 4. **Domínio** — ajustar `og:url` / `canonical` no `<head>` depois de apontar o domínio.
 
 ## Deploy no Netlify
