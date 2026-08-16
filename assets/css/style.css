@@ -18,6 +18,10 @@
   --verde:      #2F7D52;
   --linha:      #E7D6BC;
 
+  /* largura única de todas as seções */
+  --wrap:   1040px;
+  --medida: 64ch;   /* medida de leitura para texto corrido */
+
   --raio:   18px;
   --raio-s: 12px;
   --sombra:    0 10px 30px rgba(51,32,15,.10);
@@ -58,9 +62,13 @@ p{ margin:0 0 1em; }
 strong{ color:var(--crosta); font-weight:700; }
 em{ font-style:normal; color:var(--mel-esc); }
 
-.wrap{ width:min(1120px, 100% - 40px); margin-inline:auto; }
-.wrap.narrow{ width:min(760px, 100% - 40px); }
+/* container único — todas as seções abrem e fecham na mesma linha */
+.wrap{ width:min(var(--wrap), 100% - 40px); margin-inline:auto; }
 .center{ text-align:center; }
+
+/* texto corrido nunca passa da medida de leitura, mesmo no container largo */
+.lead, .pain__close, .faq p, .guarantee p, .footer p{ max-width:var(--medida); }
+.center .lead, .lead.center, .pain__close{ margin-inline:auto; }
 
 .section{ padding:clamp(56px, 9vw, 96px) 0; }
 .lead{ font-size:1.08rem; }
@@ -104,7 +112,8 @@ em{ font-style:normal; color:var(--mel-esc); }
   margin:18px 0 0;
   font-size:.92rem; color:var(--texto-mute);
 }
-.center .trustline{ justify-content:center; }
+.center .trustline,
+.hero__inner .trustline{ justify-content:center; }
 
 /* ---------- HERO ---------- */
 .hero{
@@ -128,10 +137,11 @@ em{ font-style:normal; color:var(--mel-esc); }
 }
 .hero__inner{
   position:relative;
-  display:grid; gap:clamp(28px,4vw,56px);
-  grid-template-columns:1fr;
-  align-items:center;
+  display:flex; flex-direction:column; align-items:center;
+  text-align:center;
 }
+.hero h1{ max-width:16ch; }
+.hero__inner > p{ max-width:var(--medida); }
 .badge{
   display:inline-block;
   background:rgba(224,139,30,.12);
@@ -152,21 +162,23 @@ em{ font-style:normal; color:var(--mel-esc); }
 .hero__lead{ font-size:1.06rem; }
 .hero__list{
   list-style:none; padding:0;
-  margin:22px 0 30px;
-  display:grid; gap:10px;
+  margin:24px 0 32px;
+  display:flex; flex-wrap:wrap; justify-content:center; gap:10px;
 }
 .hero__list li{
-  display:flex; gap:10px; align-items:flex-start;
+  display:flex; gap:10px; align-items:center;
   font-weight:500;
+  background:rgba(255,255,255,.6);
+  border:1px solid var(--linha);
+  border-radius:999px;
+  padding:9px 20px;
 }
 .hero__list span{ flex:none; }
 
 /* ---------- Mockup ---------- */
-.hero__art{ display:flex; justify-content:center; }
-.hero__art--mobile{ margin:26px 0 4px; }
-.hero__art--desktop{ display:none; }
+.hero__art{ display:flex; justify-content:center; margin:26px 0 26px; }
 
-.mockup{ position:relative; width:min(300px, 78vw); }
+.mockup{ position:relative; width:min(248px, 64vw); }
 .mockup::before{           /* segunda capa atrás */
   content:"";
   position:absolute; inset:14px -18px -14px 18px;
@@ -223,7 +235,11 @@ em{ font-style:normal; color:var(--mel-esc); }
 
 /* ---------- Dor ---------- */
 .section--pain{ background:var(--branco); }
-.painlist{ list-style:none; padding:0; margin:0 0 28px; display:grid; gap:12px; }
+.painlist{
+  list-style:none; padding:0; margin:0 0 28px;
+  display:grid; gap:12px;
+  grid-template-columns:repeat(auto-fit, minmax(300px,1fr));
+}
 .painlist li{
   display:flex; gap:12px; align-items:flex-start;
   background:var(--creme);
@@ -237,8 +253,9 @@ em{ font-style:normal; color:var(--mel-esc); }
   background:rgba(224,139,30,.10);
   border:1px dashed rgba(224,139,30,.45);
   border-radius:var(--raio);
-  padding:18px 20px; margin:0;
+  padding:18px 24px; margin:0 auto;
   font-size:1.05rem;
+  text-align:center;
 }
 
 /* ---------- Receitas ---------- */
@@ -475,7 +492,7 @@ em{ font-style:normal; color:var(--mel-esc); }
   text-align:center;
   font-size:.9rem;
 }
-.footer p{ margin:0 0 10px; }
+.footer p{ margin:0 auto 10px; }
 .footer__legal{ color:#A78E72; font-size:.82rem; }
 
 /* ---------- Sticky bar ---------- */
@@ -503,12 +520,9 @@ em{ font-style:normal; color:var(--mel-esc); }
    ================================================================ */
 @media (min-width:900px){
   body{ font-size:18px; }
-  .hero__inner{ grid-template-columns:1.05fr .95fr; }
-  .hero__art--mobile{ display:none; }
-  .hero__art--desktop{ display:flex; }
-  .mockup{ width:min(360px,100%); }
-  .mockup__title{ font-size:2.1rem; }
-  .hero__list{ grid-template-columns:1fr 1fr; }
+  .mockup{ width:290px; }
+  .mockup__title{ font-size:1.9rem; }
+  .hero__list{ gap:12px; max-width:760px; }
   .guarantee{ flex-wrap:nowrap; padding:38px 40px; }
   .seal{ margin-inline:0; width:124px; height:124px; }
   .stickybar{ display:none; }
