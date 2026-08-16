@@ -30,11 +30,40 @@ robots.txt
    Sem isso os dois botões de plano não levam a lugar nenhum (avisa no console).
 2. **Pixel / tracking** — colar a tag logo antes do `</body>` do `index.html`,
    nunca dentro de um `<script>` já existente.
-3. **Mockup** — a capa é feita em CSS. Para trocar por imagem real, substituir o
-   bloco `.mockup` (aparece 2x: na hero e na seção escura "o que vem dentro").
-   As fotos de receita da referência viram `.tiles` / `.cats` com emoji — dá pra
-   trocar por `<img>` sem mexer no grid.
+3. **Imagens** — ver a seção abaixo. São 18 slots marcados na página.
 4. **Domínio** — ajustar `og:url` / `canonical` no `<head>` depois de apontar o domínio.
+
+## Imagens
+
+Os slots estão marcados com um placeholder tracejado que mostra o nome do arquivo
+esperado. Coloque os arquivos em `assets/img/` e troque a `div` por uma `img`,
+mantendo as classes:
+
+```html
+<div class="media media--4x3 ph" data-img="hero.jpg">🍞</div>
+<img class="media media--4x3" src="assets/img/hero.jpg" alt="descrição da foto">
+```
+
+`.media` cuida da proporção, dos cantos e do `object-fit: cover` — a foto pode ter
+qualquer tamanho, desde que respeite o formato. Sugestão: 1200px no lado maior.
+
+| Arquivo | Formato | Onde aparece |
+|---|---|---|
+| `hero.jpg` | 4:3 | topo da página — foto ambiente com o produto |
+| `categoria-1..5.jpg` | 4:3 | os 5 cards de categoria |
+| `receita-coxinha.jpg` | 4:3 | card "Massa de coxinha" |
+| `receita-cuca.jpg` | 4:3 | card "Cuca" |
+| `receita-fatia-hungara.jpg` | 4:3 | card "Fatia húngara" |
+| `receita-cinnamon-roll.jpg` | 4:3 | card "Cinnamon roll" |
+| `bundle.jpg` | 4:3 | bloco escuro "o que vem dentro" — mockup do pacote |
+| `bonus-1..5.jpg` | 4:3 | capas dos 5 bônus |
+| `plano-basico.jpg` | 4:3 | card do plano básico |
+| `plano-completo.jpg` | 4:3 | card do plano completo (mockup com os bônus) |
+
+Proporções disponíveis: `media--4x3`, `media--1x1`, `media--3x4`, `media--16x9`.
+
+Os 10 chips de "E ainda" e os 7 do fechamento usam só emoji. Se quiser foto neles
+também, é o mesmo padrão — trocar o `<span>` por uma `img.media.media--1x1`.
 
 ## Deploy no Netlify
 
